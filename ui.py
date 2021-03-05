@@ -1,6 +1,5 @@
 #importing all libraries
 import pandas as pd
-import lxml
 import io
 import getpass
 import requests
