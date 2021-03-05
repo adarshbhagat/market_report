@@ -72,8 +72,11 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 df = pd.read_html(str(soup))
 df=df[1]
-df=df[df['5-Day Avg Del %']>50]
+df=df[df['5-Day Avg Del %']>60]
 st.title("High Delivery percentage(NIFTY-200)")
+st.write(df)
+df=df[df['5-Day Avg Del %']<20]
+st.title("Low Delivery percentage(NIFTY-200)")
 st.write(df)
 
 url=get_url()
