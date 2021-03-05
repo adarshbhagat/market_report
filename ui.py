@@ -91,9 +91,9 @@ soup = BeautifulSoup(page.content, 'html.parser')
 df = pd.read_html(str(soup))
 df=df[1]
 st.title("High Delivery percentage(NIFTY-200)")
-st.write(df[df['5-Day Avg Del %']>60])
+st.write(df[df['5-Day Avg Del %']>60].reset_index(drop=True))
 st.title("Low Delivery percentage(NIFTY-200)")
-st.write(df[df['5-Day Avg Del %']<20])
+st.write(df[df['5-Day Avg Del %']<20].reset_index(drop=True))
 
 
 URL = 'https://www.moneycontrol.com/indian-indices/nifty-50-9.html'
