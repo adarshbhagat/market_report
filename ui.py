@@ -74,7 +74,7 @@ df = pd.read_html(str(soup))
 df=df[1]
 df=df[df['5-Day Avg Del %']>50]
 st.title("High Delivery percentage(NIFTY-200)")
-st.dataframe(df)
+st.write(df,backgroundcolor='yellow')
 
 url=get_url()
 s=requests.get(url).content
