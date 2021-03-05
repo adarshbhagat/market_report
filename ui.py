@@ -12,21 +12,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 st.markdown('<style>body{background-color: #8fa5ff;}</style>',unsafe_allow_html=True)
 
-# Finding special index
-def get_url():
-    current_time = datetime.datetime.now()
-    s='https://www1.nseindia.com/content/indices/ind_close_all_'
-    if current_time.day < 10:
-        s=s+'0'+str(current_time.day)
-    else:
-        s=s+str(current_time.day)
-    if current_time.month < 10:
-        s=s+'0'+str(current_time.month)
-    else:
-        s=s+str(current_time.month)
-    s=s+str(current_time.year)+'.csv'
-    return s
-
 url = 'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=49'
 page = requests.get(url)
 soup = BeautifulSoup(page.content, 'html.parser')
@@ -109,26 +94,6 @@ st.title("High Delivery percentage(NIFTY-200)")
 st.write(df[df['5-Day Avg Del %']>60])
 st.title("Low Delivery percentage(NIFTY-200)")
 st.write(df[df['5-Day Avg Del %']<20])
-
-url=get_url()
-s=requests.get(url).content
-df=pd.read_csv(io.StringIO(s.decode('utf-8')))
-
-df.sort_values(by=['Change(%)'], inplace=True, ascending=False)
-df=df.head()
-df.sort_values(by=['Change(%)'], inplace=True, ascending=True)
-fig = plt.figure(figsize = (10, 5))
-  
-# creating the bar plot
-plt.bar(df['Index Name'], df['Change(%)'], color ='royalblue',  
-        width = 0.4) 
-  
-st.title("Top Performing Index")
-plt.xlabel("Index") 
-plt.ylabel("% Change") 
-plt.title("Indices")
-fig.autofmt_xdate()
-st.pyplot(plt)
 
 
 URL = 'https://www.moneycontrol.com/indian-indices/nifty-50-9.html'
