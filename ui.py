@@ -10,7 +10,7 @@ import streamlit as st
 import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
-st.markdown('<style>body{background-color: darkseagreen;}</style>',unsafe_allow_html=True)
+st.markdown('<style>body{background-color: #8fa5ff;}</style>',unsafe_allow_html=True)
 
 # Finding special index
 def get_url():
@@ -74,7 +74,7 @@ df = pd.read_html(str(soup))
 df=df[1]
 df=df[df['5-Day Avg Del %']>50]
 st.title("High Delivery percentage(NIFTY-200)")
-st.write(df,backgroundcolor='yellow')
+st.write(df)
 
 url=get_url()
 s=requests.get(url).content
