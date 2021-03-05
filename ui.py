@@ -67,6 +67,37 @@ plt.title("Top Loosers in NIFTY-200")
 fig.autofmt_xdate()
 st.pyplot(plt)
 
+URL = 'https://www.zeebiz.com/market/sectors-nse'
+page = requests.get(URL)
+soup = BeautifulSoup(page.content, 'html.parser')
+df = pd.read_html(str(soup))
+df = df[0]
+df['Change %'] = df['Change %'].str[:-2]
+df["Change %"] = pd.to_numeric(df["Change %"])
+df.sort_values(by=['Change %'], inplace=True,ascending=False)
+df1 = df.head()
+df2 = df.tail()
+
+st.title("Sector Performance")
+plt.bar(df1['Sectors'], df1['Change %'], color ='royalblue',  
+        width = 0.4) 
+
+plt.xlabel("Sector") 
+plt.ylabel("% Change") 
+plt.title("Top performing sector")
+fig.autofmt_xdate()
+st.pyplot(plt)
+
+plt.bar(df2['Sectors'], df2['Change %'], color ='royalblue',  
+        width = 0.4) 
+  
+plt.xlabel("Sector") 
+plt.ylabel("% Change") 
+plt.title("Top performing sector")
+fig.autofmt_xdate()
+st.pyplot(plt)
+
+
 URL = 'https://www.moneycontrol.com/india/stockmarket/stock-deliverables/marketstatistics/indices/cnx-200.html'
 page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
