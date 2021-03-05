@@ -72,7 +72,8 @@ page = requests.get(URL)
 soup = BeautifulSoup(page.content, 'html.parser')
 df = pd.read_html(str(soup))
 df=df[1]
-st.write(df[df['5-Day Avg Del %']>50])
+df=df[df['5-Day Avg Del %']>50]
+st.write(df)
 
 url=get_url()
 s=requests.get(url).content
