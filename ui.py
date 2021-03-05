@@ -78,6 +78,7 @@ df.sort_values(by=['Change %'], inplace=True,ascending=False)
 df1 = df.head()
 df2 = df.tail()
 
+fig = plt.figure(figsize = (10, 5)) 
 st.title("Sector Performance")
 plt.bar(df1['Sectors'], df1['Change %'], color ='royalblue',  
         width = 0.4) 
@@ -88,6 +89,7 @@ plt.title("Top performing sector")
 fig.autofmt_xdate()
 st.pyplot(plt)
 
+fig = plt.figure(figsize = (10, 5)) 
 plt.bar(df2['Sectors'], df2['Change %'], color ='royalblue',  
         width = 0.4) 
   
