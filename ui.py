@@ -106,7 +106,7 @@ d2=df[1]# stocks dragging nifty down
 
 fig = plt.figure(figsize = (10, 5))
 plt.bar(d1['Stock Name'], d1['Contribution'], color ='royalblue',  width = 0.4) 
-st.title("Stocks Lifting NIFTY-50")
+st.title("Stocks dragging NIFTY up")
 plt.xlabel("Stocks Name") 
 plt.ylabel("% Change") 
 plt.title("Stock influencing NIFTY")
@@ -115,7 +115,7 @@ st.pyplot(plt)
 
 fig = plt.figure(figsize = (10, 5))
 plt.bar(d2['Stock Name'], d2['Contribution'], color ='royalblue',  width = 0.4) 
-st.title("Stocks Dropping NIFTY-50")
+st.title("Stocks dragging NIFTY down")
 plt.xlabel("Stocks Name") 
 plt.ylabel("% Change") 
 plt.title("Stock influencing NIFTY")
