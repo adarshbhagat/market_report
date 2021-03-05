@@ -67,7 +67,12 @@ plt.title("Top Loosers in NIFTY-200")
 fig.autofmt_xdate()
 st.pyplot(plt)
 
-
+URL = 'https://www.moneycontrol.com/india/stockmarket/stock-deliverables/marketstatistics/indices/cnx-200.html'
+page = requests.get(URL)
+soup = BeautifulSoup(page.content, 'html.parser')
+df = pd.read_html(str(soup))
+df=df[1]
+st.write(df[df['5-Day Avg Del %']>50])
 
 url=get_url()
 s=requests.get(url).content
