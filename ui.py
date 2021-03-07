@@ -9,19 +9,21 @@ import streamlit as st
 import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
-st.markdown('<style>body{background-color: #8fa5ff;}</style>',unsafe_allow_html=True)
+st.markdown('<style>body{background-color: #95db70;}</style>',unsafe_allow_html=True)
 
-li = ['TOP GAINERS IN NIFTY-200','TOP LOOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP GAINER SECTORS','TOP LOOSER SECTORS']
+li = ['TOP GAINERS IN NIFTY-200','TOP LOOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP GAINER SECTORS','TOP LOOSER SECTORS','RSI SCANS']
 sel = st.selectbox('Select any one', li)
 
 def plot_bar(df,col1,col2,x_label,y_label):
     st.title(sel)
-    fig = plt.figure(figsize = (10, 6))
+    plt.style.use('fivethirtyeight')
+    fig = plt.figure(figsize = (9, 6))
     plt.bar(df[col1], df[col2], color ='royalblue', width = 0.4)
     plt.xlabel(x_label)
     plt.ylabel(y_label)
     fig.autofmt_xdate()
     st.pyplot(plt)
+
     
 
     
@@ -96,7 +98,13 @@ elif sel == 'HIGH DELIVERY PERCENTAGE':
     df = pd.read_html(str(soup))
     df=df[1]
     dp1 = df[df['5-Day Avg Del %']>60].reset_index(drop=True)
-    st.write(dp1[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']])
+    st.write(dp1[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']].style.set_properties(**{'background-color': 'white','color': '#04c922'}))
+    
+elif sel == 'RSI SCANS':
+    st.write("RSI crossing above 60 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-above-60)")
+    st.write("RSI crossing below 40 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-below-40)")
+    st.write("RSI crossing above 40 in weekly chart :- [Link](https://chartink.com/screener/weekly-rsi-cross-60)")
+    
 else:
     #Delivery Percentage
     URL = 'https://www.moneycontrol.com/india/stockmarket/stock-deliverables/marketstatistics/indices/cnx-200.html'
@@ -105,6 +113,6 @@ else:
     df = pd.read_html(str(soup))
     df=df[1]
     dp2 = df[df['5-Day Avg Del %']<20].reset_index(drop=True)
-    st.write(dp2[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']])
+    st.write(dp2[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']].style.set_properties(**{'background-color': 'white','color': '#04c922'}))
     
    
