@@ -103,7 +103,7 @@ elif sel == 'HIGH DELIVERY PERCENTAGE':
 elif sel == 'RSI SCANS':
     st.write("RSI crossing above 60 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-above-60)")
     st.write("RSI crossing below 40 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-below-40)")
-    st.write("RSI crossing above 40 in weekly chart :- [Link](https://chartink.com/screener/weekly-rsi-cross-60)")
+    st.write("RSI crossing above 40 in weekly chart :- [Link](https://chartink.com/screener/weekly-rsi-cross-40)")
     
 else:
     #Delivery Percentage
