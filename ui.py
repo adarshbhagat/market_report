@@ -42,10 +42,6 @@ elif sel == 'TOP LOOSERS IN NIFTY-200':
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     result = soup.find(class_='tbldata14 bdrtpg')
-    df = pd.read_html(str(result))
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, 'html.parser')
-    result = soup.find(class_='tbldata14 bdrtpg')
     df = pd.read_html(str(result))[0]
     df['Company Name']  = df['Company Name'].str[:-34]
     df.sort_values(by=['%Chg'], inplace=True, ascending=True)
