@@ -23,6 +23,15 @@ def plot_bar(df,col1,col2,x_label,y_label):
     plt.ylabel(y_label)
     fig.autofmt_xdate()
     st.pyplot(plt)
+    
+def get_table_download_link(df):
+    """Generates a link allowing the data in a given panda dataframe to be downloaded
+    in:  dataframe
+    out: href string
+    """
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+    href = f'<a href="data:file/csv;base64,{b64}">Download csv file</a>'
 
     
 
@@ -47,6 +56,7 @@ elif sel == 'TOP LOOSERS IN NIFTY-200':
     df.sort_values(by=['%Chg'], inplace=True, ascending=True)
     loosers = df.head()# contains top loosers from NIFTY 200
     plot_bar(loosers,'Company Name','%Chg','Loosers','Change %')
+    st.markdown(get_table_download_link(df), unsafe_allow_html=True)
 elif sel == 'TOP GAINER SECTORS':
     URL = 'https://www.zeebiz.com/market/sectors-nse'
     page = requests.get(URL)
