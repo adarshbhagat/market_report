@@ -6,6 +6,7 @@ import datetime
 from bs4 import BeautifulSoup
 import smtplib
 import streamlit as st
+import base64
 import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt
