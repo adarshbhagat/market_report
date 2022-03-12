@@ -110,7 +110,7 @@ elif sel == 'TOP DECISIVE STOCKS':
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
     df=df[['Index','Indecision Intensity']]
     df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
-    data = df.head()
+    data = df.head(8)
     plot_bar(data,'Index','Indecision Intensity','Company Name','Indecision Intensity')
     
     
@@ -127,7 +127,7 @@ elif sel == 'TOP INDECISIVE STOCKS':
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
     df=df[['Index','Indecision Intensity']]
     df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
-    data = df.tail()
+    data = df.tail(8)
     plot_bar(data,'Index','Indecision Intensity','Company Name','Indecision Intensity')    
     
 else:
