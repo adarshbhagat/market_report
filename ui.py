@@ -116,21 +116,19 @@ elif sel == 'TOP DECISIVE STOCKS':
     
     
 elif sel == 'TOP INDECISIVE STOCKS':
-    url = 'https://www.investing.com/indices/cnx-200-components'
+    url = 'https://www.traderscockpit.com/?pageView=nse-indices-stock-watch&index=NIFTY+200'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    #result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
-    df = pd.read_html(str(soup))[0]
+    df = pd.read_html(str(soup))[3]
     df=df.reset_index(drop=True)
-    df['Open']=df['Last']+df['Chg.']
-    df['Body Length'] = df['Open']-df['Last']
+    df['Body Length'] = df['Open']-df['Prev. Close']
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
-    df=df[['Name','Indecision Intensity']]
+    df=df[['Index','Indecision Intensity']]
     df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
     data = df.tail()
-    plot_bar(data,'Name','Indecision Intensity','Company Name','Indecision Intensity')    
+    plot_bar(data,'Index','Indecision Intensity','Company Name','Indecision Intensity')    
     
 else:
     #Delivery Percentage
