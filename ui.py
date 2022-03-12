@@ -103,8 +103,8 @@ elif sel == 'TOP DECISIVE STOCKS':
     url = 'https://www.investing.com/indices/cnx-200-components'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
-    df = pd.read_html(str(result))[0]
+    #result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
+    df = pd.read_html(str(soup))[0]
     df=df.reset_index(drop=True)
     df['Open']=df['Last']+df['Chg.']
     df['Body Length'] = df['Open']-df['Last']
@@ -122,8 +122,8 @@ elif sel == 'TOP INDECISIVE STOCKS':
     url = 'https://www.investing.com/indices/cnx-200-components'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
-    df = pd.read_html(str(result))[0]
+    #result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
+    df = pd.read_html(str(soup))[0]
     df=df.reset_index(drop=True)
     df['Open']=df['Last']+df['Chg.']
     df['Body Length'] = df['Open']-df['Last']
