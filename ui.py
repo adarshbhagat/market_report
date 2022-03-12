@@ -100,14 +100,11 @@ elif sel == 'RSI SCANS':
     
     
 elif sel == 'TOP DECISIVE STOCKS':
-    url = 'https://www.investing.com/indices/cnx-200-components'
+    url = 'https://www.moneycontrol.com/markets/indian-indices/reDrawColData?deviceType=web&exName=N&indicesID=49&selTab=o&subTabOT=d&subTabOPL=cl&selPage=marketTerminal&classic=true&o=chg,opn,hg,lw,precl'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    #result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
     df = pd.read_html(str(soup))[0]
-    df=df.reset_index(drop=True)
-    df['Open']=df['Last']+df['Chg.']
-    df['Body Length'] = df['Open']-df['Last']
+    df['Body Length'] = df['Open']-df['Prev. Close']
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
