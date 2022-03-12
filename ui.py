@@ -104,7 +104,7 @@ elif sel == 'TOP DECISIVE STOCKS':
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     df = pd.read_html(str(soup))[3]
-    df['Body Length'] = df['Open']-df['Prev. Close']
+    df['Body Length'] = df['Open']-df['Current']
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
@@ -121,7 +121,7 @@ elif sel == 'TOP INDECISIVE STOCKS':
     soup = BeautifulSoup(page.content, 'html.parser')
     df = pd.read_html(str(soup))[3]
     df=df.reset_index(drop=True)
-    df['Body Length'] = df['Open']-df['Prev. Close']
+    df['Body Length'] = df['Open']-df['Current']
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
