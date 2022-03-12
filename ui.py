@@ -100,7 +100,7 @@ elif sel == 'RSI SCANS':
     
     
 elif sel == 'TOP DECISIVE STOCKS':
-    url = 'https://www.moneycontrol.com/markets/indian-indices/reDrawColData?deviceType=web&exName=N&indicesID=49&selTab=o&subTabOT=d&subTabOPL=cl&selPage=marketTerminal&classic=true&o=chg,opn,hg,lw,precl'
+    url = 'https://www.traderscockpit.com/?pageView=nse-indices-stock-watch&index=NIFTY+200'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     df = pd.read_html(str(soup))[0]
@@ -108,10 +108,10 @@ elif sel == 'TOP DECISIVE STOCKS':
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
     df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
-    df=df[['Name','Indecision Intensity']]
+    df=df[['Index','Indecision Intensity']]
     df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
     data = df.head()
-    plot_bar(data,'Name','Indecision Intensity','Company Name','Indecision Intensity')
+    plot_bar(data,'Index','Indecision Intensity','Company Name','Indecision Intensity')
     
     
     
