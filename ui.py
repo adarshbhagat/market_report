@@ -11,7 +11,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 st.markdown('<style>body{background-color: #95db70;}</style>',unsafe_allow_html=True)
 
-li = ['TOP GAINERS IN NIFTY-200','TOP LOOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP GAINER SECTORS','TOP LOOSER SECTORS','RSI SCANS']
+li = ['TOP GAINERS IN NIFTY-200','TOP LOOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP DECISIVE STOCKS','TOP INDECISIVE STOCKS','TOP GAINER SECTORS','TOP LOOSER SECTORS','RSI SCANS']
 sel = st.selectbox('Select any one', li)
 
 def plot_bar(df,col1,col2,x_label,y_label):
@@ -97,6 +97,43 @@ elif sel == 'RSI SCANS':
     st.write("RSI crossing above 60 in daily+weekly+monthly chart :- [Link](https://chartink.com/screener/copy-main-7-star-setup)")
     st.write("RSI near 40 in daily chart with daily+weekly RSI>60 :- [Link](https://chartink.com/screener/5-star-40-support)")
     st.write("3 Candle Triangle in daily chart :- [Link](https://chartink.com/screener/3-candle-triangle-in-daily-chart)")
+    
+    
+elif sel == 'TOP DECISIVE STOCKS':
+    url = 'https://www.investing.com/indices/cnx-200-components'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
+    df = pd.read_html(str(result))[0]
+    df=df.reset_index(drop=True)
+    df['Open']=df['Last']+df['Chg.']
+    df['Body Length'] = df['Open']-df['Last']
+    df['Body Length'] = df['Body Length'].abs()
+    df['Wick Length'] = df['High']-df['Low']
+    df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
+    df=df[['Name','Indecision Intensity']]
+    df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
+    data = df.head()
+    plot_bar(data,'Name','Indecision Intensity','Company Name','Indecision Intensity')
+    
+    
+    
+elif sel == 'TOP INDECISIVE STOCKS':
+    url = 'https://www.investing.com/indices/cnx-200-components'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    result = soup.find(class_='genTbl closedTbl crossRatesTbl elpTbl elp25')
+    df = pd.read_html(str(result))[0]
+    df=df.reset_index(drop=True)
+    df['Open']=df['Last']+df['Chg.']
+    df['Body Length'] = df['Open']-df['Last']
+    df['Body Length'] = df['Body Length'].abs()
+    df['Wick Length'] = df['High']-df['Low']
+    df['Indecision Intensity'] = df['Wick Length']/df['Body Length']
+    df=df[['Name','Indecision Intensity']]
+    df.sort_values(by=['Indecision Intensity'], inplace=True, ascending=True)
+    data = df.tail()
+    plot_bar(data,'Name','Indecision Intensity','Company Name','Indecision Intensity')    
     
 else:
     #Delivery Percentage
