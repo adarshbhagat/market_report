@@ -103,7 +103,7 @@ elif sel == 'TOP DECISIVE STOCKS':
     url = 'https://www.traderscockpit.com/?pageView=nse-indices-stock-watch&index=NIFTY+200'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
-    df = pd.read_html(str(soup))[0]
+    df = pd.read_html(str(soup))[3]
     df['Body Length'] = df['Open']-df['Prev. Close']
     df['Body Length'] = df['Body Length'].abs()
     df['Wick Length'] = df['High']-df['Low']
