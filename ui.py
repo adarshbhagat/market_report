@@ -94,9 +94,9 @@ elif sel == 'HIGH DELIVERY PERCENTAGE':
     st.write(dp1[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']].style.set_properties(**{'background-color': 'white','color': '#04c922'}))
     
 elif sel == 'RSI SCANS':
-    st.write("RSI crossing above 60 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-above-60)")
-    st.write("RSI crossing below 40 in daily chart :- [Link](https://chartink.com/screener/rsi-crossed-below-40)")
-    st.write("RSI crossing above 40 in weekly chart :- [Link](https://chartink.com/screener/weekly-rsi-cross-40)")
+    st.write("RSI crossing above 60 in daily+weekly+monthly chart :- [Link](https://chartink.com/screener/copy-main-7-star-setup)")
+    st.write("RSI near 40 in daily chart with daily+weekly RSI>60 :- [Link](https://chartink.com/screener/5-star-40-support)")
+    st.write("3 Candle Triangle in daily chart :- [Link](https://chartink.com/screener/3-candle-triangle-in-daily-chart)")
     
 else:
     #Delivery Percentage
