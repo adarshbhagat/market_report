@@ -89,7 +89,7 @@ elif sel == 'HIGH DELIVERY PERCENTAGE':
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     df = pd.read_html(str(soup))
-    df=df[1]
+    df=df[0]
     dp1 = df[df['5-Day Avg Del %']>60].reset_index(drop=True)
     st.write(dp1[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']].style.set_properties(**{'background-color': 'white','color': '#04c922'}))
     
@@ -136,7 +136,7 @@ else:
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     df = pd.read_html(str(soup))
-    df=df[1]
+    df=df[0]
     dp2 = df[df['5-Day Avg Del %']<20].reset_index(drop=True)
     st.write(dp2[['Company Name', 'Chg %', 'Dely %', '5-Day Avg Del %']].style.set_properties(**{'background-color': 'white','color': '#04c922'}))
     
