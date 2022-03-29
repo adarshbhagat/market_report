@@ -11,7 +11,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 st.markdown('<style>body{background-color: #95db70;}</style>',unsafe_allow_html=True)
 
-li = ['TOP GAINERS IN NIFTY-200','TOP LOOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP DECISIVE STOCKS','TOP INDECISIVE STOCKS','TOP GAINER SECTORS','TOP LOOSER SECTORS','RSI SCANS']
+li = ['TOP GAINERS IN NIFTY-200','TOP LOSERS IN NIFTY-200','HIGH DELIVERY PERCENTAGE','LOW DELIVERY PERCENTAGE','STOCKS DRAGGING NIFTY UP','STOCKS DRAGGING NIFTY DOWN','TOP DECISIVE STOCKS','TOP INDECISIVE STOCKS','TOP GAINER SECTORS','TOP LOOSER SECTORS','RSI SCANS']
 sel = st.selectbox('Select any one', li)
 
 def plot_bar(df,col1,col2,x_label,y_label):
@@ -38,7 +38,7 @@ if sel == 'TOP GAINERS IN NIFTY-200':
     df.sort_values(by=['%Chg'], inplace=True, ascending=False)
     gainers=df.head()# Contains top gainers from NIFTY 200
     plot_bar(gainers,'Company Name','%Chg','Gainers','Change %')
-elif sel == 'TOP LOOSERS IN NIFTY-200':
+elif sel == 'TOP LOSERS IN NIFTY-200':
     url = 'https://www.moneycontrol.com/stocks/marketstats/indexcomp.php?optex=NSE&opttopic=indexcomp&index=49'
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
